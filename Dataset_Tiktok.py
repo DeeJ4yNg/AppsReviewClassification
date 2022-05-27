@@ -11,7 +11,6 @@ warnings.filterwarnings("ignore")
 def Data_Sets(data_path, batch_size, Vocab_Path):
     df = pd.read_csv(data_path)  # read data from csv file
     df['Labels'] = df['score'].apply(lambda x: x - 1)
-    # We only care about content users provide and the score they provide
     contents = df.content.values
     # Make score as label
     labels = df.Labels.values
@@ -25,7 +24,7 @@ def Data_Sets(data_path, batch_size, Vocab_Path):
     attention_masks = []
     for content in contents:
         encoded_dict = tokenizer.encode_plus(
-                        str(content),                      # Sentence to encode.
+                        str(content),                      
                         add_special_tokens = True, # Add '[CLS]' and '[SEP]'
                         max_length = 64,           # Pad & truncate all sentences.
                         pad_to_max_length = True,
