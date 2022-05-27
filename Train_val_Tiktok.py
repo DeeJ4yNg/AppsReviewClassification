@@ -21,7 +21,6 @@ def Device_to_use():
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
     else:
-        #print('Oooops, seems you do not have any GPU, go go go order a 3090Ti now!!!. Have to use CPU instead for now...TAT')
         device = torch.device("cpu")
 
 def flat_accuracy(preds, labels):
@@ -32,8 +31,6 @@ def flat_accuracy(preds, labels):
 def format_time(elapsed):
     elapsed_rounded = int(round((elapsed)))
     return str(datetime.timedelta(seconds=elapsed_rounded))
-
-
 
                                         # ========================================
                                         #               Training
@@ -49,7 +46,6 @@ def Train_Validate(epochs, learning_rate, adam_epsilon, train_dataloader, valida
         #return_dict=False
     )
     print(model)
-    #Optimizer AdamW (RMSProp + Momentom + weight decay)
     optimizer = AdamW(model.parameters(),
                       lr=learning_rate,
                       eps=adam_epsilon
@@ -68,7 +64,7 @@ def Train_Validate(epochs, learning_rate, adam_epsilon, train_dataloader, valida
     step_count = 0
     for epoch_i in range(0, epochs):
         print("")
-        print('======== Epoch {:} / {:} ========'.format(epoch_i + 1, epochs))
+        print('-----------Epoch {:} / {:}-----------'.format(epoch_i + 1, epochs))
         print('Training...')
         t0 = time.time()
         total_train_loss = 0
